@@ -9,7 +9,7 @@
 ## Build for dev
 ⚠️ Before run dev need manualy add trusted-crypto in /app/node_modules/ Will fixed in future
 ```bash
-git clone https://github.com/TrustedPlus/esign.git
+git clone https://github.com/TrustedPlus/GUI-Trusted-JKH.git
 cd esign && npm install
 cd app && npm install
 cd ..

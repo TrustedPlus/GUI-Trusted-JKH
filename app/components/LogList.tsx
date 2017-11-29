@@ -15,7 +15,6 @@ class LogList extends React.Component<any, any> {
 
   componentWillMount(){
     try{
-      //let journal_path = './app/resources/log/test.txt';
       const JOURNAL_PATH = native.path.join(native.DEFAULT_PATH, "log", "gis-proxy.log");
       let data: string = native.fs.readFileSync(JOURNAL_PATH);
       this.setState({logs: new String(data).split('\n')});

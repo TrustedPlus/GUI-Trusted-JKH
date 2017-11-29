@@ -150,7 +150,7 @@ export default {
     INFO: "Information", 
     DEBUG: "Debugging information", 
     TRACE: "Trace information", 
-    ALL: "Логирование всего", 
+    ALL: "Logging all", 
     clear_journal: "Clear log",
     test_response: "Test the exchange",  
     encoding: "Encoding type",

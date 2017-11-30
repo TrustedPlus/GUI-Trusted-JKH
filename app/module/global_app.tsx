@@ -110,54 +110,41 @@ export function get_settings_from_json(operation: string, settings_name: string)
         data = JSON.parse(data);
         return data[operation][settings_name];
     } catch (e) {
-        if (operation === "SIGN") {
-            if (settings_name === "settings_for_sign") {
+        if (operation === "settings") {
+            if (settings_name === "locale") {
+                return "RU";
+            } else if (settings_name === "proxy") {
+                return {
+                    port: 8080,
+                    server_status: "onstop",
+                    ip_server: "217.107.108.147",
+                    port_server: 10081
+                }
+            } else if (settings_name === "sign") {
                 return {
                     directory: "",
                     add_time: false,
                     encoding: "BASE-64",
                     detached: false,
-                };
-            } else {
-                return null;
-            }
-        } else if (operation === "proxy") {
-            if(settings_name === "port"){
-                return 8080;
-            }else if(settings_name === "server_status"){
-                return "onstop";
-            }else if(settings_name === "ip_server"){
-                return "217.107.108.147";
-            }else if(settings_name === "port_server"){
-                return "10081";
-            }
-        } else if (operation === "settings") {
-            if (settings_name === "locale") {
-                return "RU";
-            }
-        } else {
-            if (settings_name === "settings_for_encrypt") {
+                }
+            } else if (settings_name === "encrypt") {
                 return {
                     directory: "",
                     archive_files: false,
                     encoding: "BASE-64",
                     delete_files: false,
-                };
+                }
             } else {
-                return [];
+                return null;
             }
+        } else {
+            return null;
         }
     }
 };
 
 class WorkWithSettings{
     get_setting(setting_name: string){
-        let data;
-        try{
-        
-        }catch(e){
-
-        }
         return get_settings_from_json("settings", "proxy")[setting_name];
     }
 
@@ -179,9 +166,6 @@ class WorkWithSettings{
                 }
             };
         }
-
-
-        // data.settings["proxy"][setting_name] = param;
         data = JSON.stringify(data);
         native.fs.writeFileSync(SETTINGS_JSON, data, "utf8");
     }

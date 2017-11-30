@@ -333,13 +333,17 @@ class Proxy {
     this.options;
     this.server;
     this.certFile = certFile;
+    this.current_port;
   }
 
   start() {
     try {
       this.options = ConfigureServer(this.certFile);
       this.server = createServer(this.certFile);
-      this.server.listen(this.options.proxy.port);
+      if (this.current_port !== this.options.proxy.port){
+        this.server.listen(this.options.proxy.port);
+        this.current_port = this.options.proxy.port;
+      } 
 
       this.server.once('error', (e) => {
         if (e.code === 'EADDRINUSE') {

@@ -17,7 +17,12 @@ class LogList extends React.Component<any, any> {
     try{
       const JOURNAL_PATH = native.path.join(native.DEFAULT_PATH, "log", "gis-proxy.log");
       let data: string = native.fs.readFileSync(JOURNAL_PATH);
-      this.setState({logs: new String(data).split('\n')});
+      let start_log_array = new String(data).split('\n');
+      this.setState({logs: start_log_array});
+      if(start_log_array.length >= 100){
+        start_log_array = start_log_array.slice(0, 100);
+      }
+      this.setState({items: start_log_array});
     }catch(e){
 
     }

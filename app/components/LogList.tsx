@@ -29,11 +29,14 @@ class LogList extends React.Component<any, any> {
   }
 
   loadItems() {
+    let items = this.state.items;
+    if(items.length === this.state.logs.length){
+      return;
+    }
+
     for(let i = 0; i < 100; i++){
-      if(this.state.items.length < this.state.logs.length){
-        this.state.items.push(this.state.logs[this.state.items.length]);
-      }else{
-        return;
+      if(items.length < this.state.logs.length){
+        items.push(this.state.logs[items.length]);
       }
     }
     this.setState({items: this.state.items});

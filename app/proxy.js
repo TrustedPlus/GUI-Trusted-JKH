@@ -363,6 +363,7 @@ class Proxy {
   stop(){
     work_with_settings.set_setting('server_status', "onstop");
     this.server.close();
+    this.current_port = null;
     logger.trace('Stop server');
   }
 

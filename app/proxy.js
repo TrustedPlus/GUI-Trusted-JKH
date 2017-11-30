@@ -12,7 +12,6 @@ log4js.configure({
     file : {
       type : 'file',
       filename : native.path.join(native.DEFAULT_PATH, "log", "gis-proxy.log"),
-      //filename: 'gis-proxy',
       maxLogSize : 1024 * 1024, // = 1 MB
       numBackups : 3,
       compress : true,
@@ -57,7 +56,6 @@ function GetPrivateKey(cert) {
   // let key;
   // try {
   //   key = providerMicrosoft.getKey(cert);
-  //   //console.log(key.write);
   // } catch (err) {
   //   alert('Ошибка ' + err.name + ":" + err.message + "\n" + err.stack); 
   //   logger.error('Error get access to private key', err);
@@ -66,7 +64,7 @@ function GetPrivateKey(cert) {
   
   // key.writePublicKey('./app/publicKey.pem', trusted.DataFormat.PEM);
   // TODO nofile
-  //key.writePrivateKey('./tmp.pem', trusted.DataFormat.PEM, '');
+  // key.writePrivateKey('./tmp.pem', trusted.DataFormat.PEM, '');
   return fs.readFileSync('./config/tmp.pem');
 }
 
@@ -75,7 +73,6 @@ function GetPrivateKey(cert) {
  * @param {String} certFile Name of file with certificate
  * @return {Object}
  */
-//const ConfigureServer = (certFile) => {
 function ConfigureServer(certFile) {
 
   let certBuffer = '';
@@ -93,14 +90,10 @@ function ConfigureServer(certFile) {
   let client_port = Number(work_with_settings.get_setting("port")) || 8080;
   let server_ip = work_with_settings.get_setting("ip_server") || "217.107.108.147";
   let server_port = Number(work_with_settings.get_setting("port_server")) || 10081;
-  //console.log(client_port + " " + server_ip + " " + server_port);
-  //fs.writeFileSync('certder.cer', certPEM);
 
   let options = {
     https : {
-      //hostname: "217.107.108.147", // ip address of GIS ZHKH server
       hostname: server_ip, // ip address of GIS ZHKH server
-      //port: 10081,
       port: server_port,
       auth :'sit:xw{p&&Ee3b9r8?amJv*]',
       key : privateKey,
@@ -113,7 +106,6 @@ function ConfigureServer(certFile) {
       }
     },
     proxy : {
-      //port: 8080,
       port: client_port,
     },
     sign : {
@@ -123,7 +115,6 @@ function ConfigureServer(certFile) {
     },
     cert : cert,
   }
-  //alert(server_ip);
   return options;
 }
 
@@ -224,24 +215,19 @@ function CheckTestResponse(resultXml) {
     alert("Can't get information about organisation from xml");
     return false;
   } else {
-    // let organizationName = doc.getElementsByTagName("ns9:FullName")[0].textContent;
-    // let ogrn = doc.getElementsByTagName("ns10:OGRN")[0].textContent;
-    // let inn = doc.getElementsByTagName("ns10:INN")[0].textContent;
-    // let registrationDate = doc.getElementsByTagName("ns9:StateRegistrationDate")[0].textContent;
-    // let roleName = doc.getElementsByTagName("ns7:Name")[0].textContent;
-    // let timeOfReceive = doc.getElementsByTagName("ns4:Date")[0].textContent;
-    // timeOfReceive = timeOfReceive.replace("T", " в ");
-    // let infoNode = document.getElementById('test-info');
-    // infoNode.innerHTML = "От ГИС ЖКХ получена информация о зарегистрированной организации <br>" + 
-    //     "<table>" +
-    //       "<tr><td>Полное название</td><td>" + organizationName + "</td></tr>" +
-    //       "<tr><td>ОГРН</td><td>" + ogrn + "</td></tr>" +
-    //       "<tr><td>ИНН</td><td>" + inn + "</td></tr>" +
-    //       "<tr><td>Дата регистрации</td><td>" + registrationDate + "</td></tr>" +
-    //       "<tr><td>Роль на ГИС ЖКХ</td><td>" + roleName + "</td></tr>" +
-    //       "<tr><td>Время получения отвера</td><td>" + timeOfReceive + "</td></tr>" +
-    //     "</table>";
-    // infoNode.style.backgroundColor = "lightgreen";
+    let organizationName = doc.getElementsByTagName("ns9:FullName")[0].textContent;
+    let ogrn = doc.getElementsByTagName("ns10:OGRN")[0].textContent;
+    let inn = doc.getElementsByTagName("ns10:INN")[0].textContent;
+    let registrationDate = doc.getElementsByTagName("ns9:StateRegistrationDate")[0].textContent;
+    let roleName = doc.getElementsByTagName("ns6:Name")[0].textContent;
+    let timeOfReceive = doc.getElementsByTagName("ns4:Date")[0].textContent;
+    timeOfReceive = timeOfReceive.replace("T", " в ");
+    let dataAnswer = `Полное название: ${organizationName} \n` +
+                    `OGRN: ${ogrn} \n` +
+                    `INN: ${inn} \n` +
+                    `Дата регистрации: ${registrationDate} \n` +
+                    `Роль на ГИС ЖКХ: ${roleName} \n` +
+                    `Время получения ответа: ${timeOfReceive}`;
     return true;
   }
 }
@@ -354,10 +340,17 @@ class Proxy {
       this.options = ConfigureServer(this.certFile);
       this.server = createServer(this.certFile);
       this.server.listen(this.options.proxy.port);
+
+      this.server.once('error', (e) => {
+        if (e.code === 'EADDRINUSE') {
+          console.log('Address in use, retrying...');
+        }
+      });
+
       work_with_settings.set_setting('server_status', "onstart");
       logger.trace('Start server');
     } catch (err) { 
-      alert('Ошибка ' + err.name + ":" + err.message + "\n" + err.stack); 
+      //alert('Ошибка ' + err.name + ":" + err.message + "\n" + err.stack); 
       logger.error('Error while start server:\n', err);
       alert('Error while start server');
     }

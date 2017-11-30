@@ -21,9 +21,7 @@ class Log4ForSettings extends React.Component<any, any> {
   }
 
   removeJournal(){
-      //const JOURNAL_PATH = './app/resources/log/test.txt';
-      const JOURNAL_PATH = native.path.join(native.DEFAULT_PATH, "log", "gis-proxy.log");
-      //native.fs.unlinkSync(JOURNAL_PATH);
+      const JOURNAL_PATH = native.path.join(native.HOME_DIR, ".Trusted", "Trusted JKH", "gis-proxy.log");
       native.fs.writeFileSync(JOURNAL_PATH, '');
   }
 

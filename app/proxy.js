@@ -11,7 +11,7 @@ log4js.configure({
   appenders : {
     file : {
       type : 'file',
-      filename : native.path.join(native.DEFAULT_PATH, "log", "gis-proxy.log"),
+      filename : native.path.join(native.HOME_DIR, ".Trusted", "Trusted JKH", "gis-proxy.log"),
       maxLogSize : 1024 * 1024, // = 1 MB
       numBackups : 3,
       compress : true,

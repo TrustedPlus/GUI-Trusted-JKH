@@ -50,7 +50,7 @@ class LogList extends React.Component<any, any> {
       </div>;
     });
 
-    return <div className="app-loglist-text" style={{height: '90%', overflow:'auto'}}>
+    return <div className="app-loglist-text">
       <InfiniteScroll
         loadMore={this.loadItems.bind(this)}
         hasMore={true}

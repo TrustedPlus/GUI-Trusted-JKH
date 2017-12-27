@@ -1,8 +1,6 @@
 import * as React from "react";
 import { lang, LangApp } from "../module/global_app";
 import ViewTextFile from "./ViewTextFile";
-import LogList from "./LogList";
-import LogBack from "./LogBack";
 //declare const $: any;
 
 export default class JournalWindow extends React.Component<any, any> {
@@ -13,9 +11,10 @@ export default class JournalWindow extends React.Component<any, any> {
 
   render(): any {
     return (
-      <div className="main">
-        <LogBack />
-        <LogList />
+      <div className="app-loglist-back">
+        <div>
+          <a className="waves-effect waves-light btn-large add-cert-btn" href="#">{lang.get_resource.Common.Back}</a>
+        </div>
       </div>
     );
   }

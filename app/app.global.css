@@ -693,6 +693,16 @@ div::-webkit-scrollbar-thumb {
 
 .app-loglist-text{
     font-size: 80%;
+    height: 83%;
+    overflow: auto;
+    padding:5px;
+}
+
+.app-loglist-back {
+    background-color: #972c12;
+    box-shadow: none;
+    height: 48px;
+    line-height: 48px;
 }
 
 /*-------------------------------Стили кнопок------------------*/
@@ -2386,6 +2396,10 @@ a.cert-back-btn.waves-effect.waves-light {
   width: 40px;
   padding: 0 10px;
 }
+
+a.add-cert-btn.waves-effect.waves-light {
+    margin-left: 650px;
+  }
 
 .sign-info {
     padding-right: 0;

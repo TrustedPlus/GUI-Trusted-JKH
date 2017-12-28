@@ -13,7 +13,7 @@ export default class JournalWindow extends React.Component<any, any> {
     return (
       <div className="app-loglist-back">
         <div>
-          <a className="waves-effect waves-light btn-large add-cert-btn" href="#">{lang.get_resource.Common.Back}</a>
+          <a className="waves-effect waves-light btn-large add-cert-btn back-btn-log" href="#">{lang.get_resource.Common.Back}</a>
         </div>
       </div>
     );

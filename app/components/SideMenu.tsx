@@ -42,6 +42,7 @@ class SideMenu extends React.Component<any, any> {
         <Link to="/setting" {...settings} style={MenuStyle}>{localize("Settings.Settings", locale)}<i className="material-icons left setting">mode_edit</i></Link>
         <Link to="/journal" {...settings} style={MenuStyle}>{localize("Journal.Journal", locale)}<i className="material-icons left journal">enhanced_encryption</i></Link>
         <Link to="/certificate" {...settings} style={MenuStyle}>{localize("Certificate.Certificate", locale)}<i className="material-icons left cert">library_books</i></Link>
+        <Link to="/request" {...settings} style={MenuStyle}>{localize("Requests.Requests", locale)}<i className="material-icons left queries">request</i></Link>
         <div className="menu-elements">
           <Link className={"bordered--top"} {...settings} to="/about" style={MenuStyle}>{localize("About.About", locale)}<i className="material-icons left about">about</i></Link>
           <Link to="/license" {...settings} style={MenuStyle}>{localize("License.License", locale)}<i className="material-icons left license">license</i></Link>

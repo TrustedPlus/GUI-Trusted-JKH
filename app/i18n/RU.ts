@@ -339,4 +339,8 @@ export default {
     serverRestart: "ПЕРЕЗАПУСК СЕРВЕРА ...",
 
   },
+  Requests: {
+    requests: "Запросы",
+    Requests: "ЗАПРОСЫ",
+  },
 };

@@ -339,4 +339,8 @@ export default {
     serverStop: "SERVER IS STOPPED",
     serverRestart: "SERVER RESTART...",
   },
+  Requests: {
+    requests: "requests",
+    Requests: "REQUESTS",
+  },
 };

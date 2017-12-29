@@ -11,6 +11,7 @@ import MainWindow from "./MainWindow";
 import MenuBar from "./MenuBar";
 import SettingsWindow from "./SettingsWindow";
 import JournalWindow from "./JournalWindow";
+import RequestWindow from "./RequestWindow";
 
 class App extends React.Component<any, any> {
   static childContextTypes = {
@@ -38,6 +39,7 @@ class App extends React.Component<any, any> {
           <Route path="/setting" component={SettingsWindow} />
           <Route path="/journal" component={JournalWindow} />  
           <Route path="/certificate" component={CertWindow} />
+          <Route path="/request" component={RequestWindow} />
           <Route path="/license" component={LicenseWindow} />
           <Route path="/about" component={AboutWindow} />
           <Route path="/help" component={HelpWindow} />

@@ -68,6 +68,8 @@ class MenuBar extends React.Component<any, any> {
       title = localize("License.license", locale);
     else if (pathname === "/help")
       title = localize("Help.help", locale);
+    else if (pathname === "/request")
+      title = localize("Requests.requests", locale);
     else
       title = localize("About.product_NAME", locale);
 

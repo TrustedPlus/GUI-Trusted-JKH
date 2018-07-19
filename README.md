@@ -7,9 +7,9 @@
 ```
 
 ## Build for dev
-⚠️ Before run dev need manualy add trusted-crypto in /app/node_modules/ Will fixed in future
+⚠️ Before run dev need manualy add [TrustedPlus/crypto](https://github.com/TrustedPlus/crypto/) in /app/node_modules/ Will fixed in future
 ```bash
-git clone https://github.com/TrustedPlus/GUI-Trusted-JKH.git
+git clone https://github.com/TrustedPlus/gkh.git
 cd esign && npm install
 cd app && npm install
 cd ..
